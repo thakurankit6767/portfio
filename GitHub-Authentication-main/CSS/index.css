@@ -1,0 +1,89 @@
+
+  #main {
+    display: none;
+    width: 80%;
+    margin: auto;
+    margin-top: 30px;
+    justify-content: space-between;
+    
+}
+  .profile-div
+  {
+        width: 25%;
+        font-family: "Segoe UI",Helvetica,Arial,sans-serif !important;
+        /* border: 1px solid red; */
+  }
+  .repo-div
+  {
+        width: 73%;
+  }
+  .profile-div img{
+      width: 100%;
+      border-radius: 50%;
+      border: 1px solid black;
+      
+  }
+  .profile-div button
+  {
+      background-color: #F6F8FA;
+      width: 100%;
+      padding: 10px;
+        border-radius: 5px;
+        border: 2px solid rgb(199, 199, 199);
+  }
+  .card
+  {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px;
+      font-family: "Segoe UI",Helvetica,Arial,sans-serif !important;
+      /* border: 1px solid red; */
+  }
+  #repo-name
+  {
+    color: #0969da;
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  #lang{
+    font-size: 12px;
+    
+  }
+  #date {
+    margin-left: 20px;
+    font-size: 12px;
+  }
+  #public{
+    border: 1px solid grey;
+    border-radius: 10px;
+    padding: 1.5px 5px;
+    font-size: 12px;
+    margin-left: 1.5%;
+  }
+ 
+  .card > div:nth-child(1){
+    width: 90%;
+  }
+  .star button{
+    /* border: 1px solid blue; */
+    margin-top: 50%;
+  }
+
+  #full-name {
+    font-size: 22px;
+    font-weight: bold;
+    line-height: 0;
+  }
+
+  #username{
+    color: grey;
+    font-size: 18px;    
+  }
+
+  #bio{
+    font-size: 16px;
+  }
+#followers,#following,#location,p{
+  font-size: 14px;
+}

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="CSS/navbar.css">
+    <link rel="stylesheet" href="CSS/index.css">
+    <script src="https://code.iconify.design/2/2.1.0/iconify.min.js"></script>
+  </head>
+
+
+  <style>
+
+  </style>
+  <body>
+    <div id="nav"></div>
+    <div id="main">
+      <div class="profile-div">
+        <img id="user-img">
+        <p id="full-name"></p>
+        <p id="username"></p>        
+        <p id="bio"></p>
+        <button>Follow</button>
+        <p>
+          <span class="iconify" data-icon="ph:users-light"></span> <span id="followers"></span> followers &bull;
+          <span id="following"></span>following 
+          <span class="iconify" data-icon="ant-design:star-outlined"></span>
+          <span id="stars"></span>
+        </p>
+        <p><span class="iconify" data-icon="fluent:location-16-regular"></span>
+          <span id="location"></span>
+        </p>
+      </div>
+      <div class="repo-div">
+       
+      </div>
+    </div>
+  </body>
+</html>
+
+<script type="module">
+  import navbar from "./JS/navbar.js";
+  import getdata from "./JS/getData.js";
+
+  var response
+
+  let navbar_container=document.getElementById("nav")
+  navbar_container.innerHTML=navbar();
+  
+
+  let search_box=document.getElementById("search-input")
+  // console.log(search_box)
+  search_box.addEventListener("keypress",makeapicall )
+  // console.log(getdata())
+
+  async function makeapicall(e) {    
+    if(e.key==='Enter') {
+
+    document.getElementById("main").style.display = "flex";
+    let user=search_box.value
+
+    response = await getdata(user);
+
+    let avatar=response.avatar_url
+    console.log(response)
+
+    let new1=document.getElementById("profile-img")
+    new1.removeAttribute
+
+    new1.setAttribute("src",avatar)
+
+      document.getElementById("user-img").src = response.avatar_url;
+      document.getElementById("full-name").textContent = response.name;
+      document.getElementById("username").textContent = response.login;
+      document.getElementById("bio").textContent = response.bio;
+      document.getElementById("followers").textContent = response.followers;
+      document.getElementById("following").textContent = response.following;
+      document.getElementById("stars").textContent = parseInt(Math.random()*10);
+      document.getElementById("location").textContent = response.location;
+
+    getrepo();
+    }    
+
+  }
+  
+  // let btn=document.getElementById("get")
+  // btn.addEventListener("click",getrepo)
+
+  async function getrepo() {
+    let res = await  fetch(response.repos_url)
+
+    let data= await res.json()
+    console.log('data:', data)
+
+
+    var mainRepoDiv =  document.querySelector(".repo-div");
+
+
+    data.forEach( async function(item)
+    {
+      
+    var lang = (item.language == null)? "" : item.language;
+    var date = (item.updated_at.substring(0,10))
+
+        var card = document.createElement("div");
+        card.setAttribute("class","card");
+        card.innerHTML = 
+        `
+        <div class="repo-subdiv">
+          <p>
+            <span id="repo-name">${item.name}</span>
+            <span id="public">Public</span>
+          </p>
+          <p>
+            <span id="lang">${lang}</span>
+            <span id="date">Updated ${date}</span>
+          </p>
+
+        </div>
+        <div class="star">
+          <button><span class="iconify" data-icon="ant-design:star-outlined"></span> Star</button>
+        </div>
+        `;
+        var hr = document.createElement("hr");
+        mainRepoDiv.append(card, hr);
+    });
+    
+  }
+
+
+</script>
